@@ -1,0 +1,32 @@
+Modified OpenJDK 19
+===================
+
+This project contains modifications of source code derived from
+OpenJDK 19.
+
+Original project:
+OpenJDK
+
+Original copyright:
+Copyright (c) 2007, 2025, Oracle and/or its affiliates.
+All rights reserved.
+
+The original OpenJDK copyright notices and license headers have
+been preserved in the modified source files.
+
+The applicable source files are licensed under the GNU General
+Public License version 2 only, with the Classpath Exception,
+as designated by Oracle in the original OpenJDK source code.
+
+Modifications
+-------------
+
+The source files contained in this repository have been modified
+from their original OpenJDK versions.
+
+Modifications were made in 2026 by:
+
+[Twoje imię / nazwa projektu]
+
+The modifications are distributed under the applicable licensing
+terms of the original OpenJDK source code.

@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.youcode</groupId>
+        <artifactId>apparatus-root</artifactId>
+        <version>1.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>jdk19mod</artifactId>
+    <packaging>jar</packaging>
+	
+	<name>jdk19mod</name>
+	
+	<build>
+		<plugins>
+			<!-- Kompilacja -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<source>19</source>
+					<target>19</target>
+
+					<encoding>UTF-8</encoding>
+					<compilerArgs>
+						<!--Dodana konfiguracja ignorowania błędów z uwagi na dostępn do sun.java2d.* 
+						(por https://stackoverflow.com/questions/13121954/maven-cant-compile-class-which-depends-on-rt-jar)-->
+						<arg>-XDignore.symbol.file</arg>
+						<arg>--add-exports</arg>
+						<arg>java.desktop/sun.awt.image=ALL-UNNAMED </arg>
+						<arg>--add-exports</arg>
+						<arg>java.desktop/sun.java2d=ALL-UNNAMED </arg>
+						<arg>--add-exports</arg>
+						<arg>java.desktop/sun.java2d.pipe=ALL-UNNAMED</arg>
+						<arg>--add-exports</arg>
+						<arg>java.desktop/sun.java2d.pipe.hw=ALL-UNNAMED</arg>
+						<arg>--add-exports</arg>
+						<arg>java.desktop/sun.java2d.d3d=ALL-UNNAMED</arg>
+						<arg>--add-exports</arg>
+						<arg>java.desktop/sun.java2d.opengl=ALL-UNNAMED</arg>
+						<arg>--add-exports</arg>
+						<arg>java.desktop/sun.java2d.loops=ALL-UNNAMED</arg>
+						<arg>--add-opens</arg>
+						<arg>java.desktop/sun.java2d.opengl=ALL-UNNAMED</arg>
+						<arg>--add-opens</arg>
+						<arg>java.desktop/sun.java2d.d3d=ALL-UNNAMED</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<!-- TODO: dostosować zależności, aby to pozwalało na budowanie projektu bez
+	d3d (częściowo zrobione, usunąć testowe fragmenty kodu)-->
+	<profiles>
+		<profile>
+			<id>exclude-d3d</id>
+			<activation>
+				<os>
+					<family>!windows</family>
+				</os>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>ext/sun/java2d/d3d/D3DBlitLoopsExt.java</exclude>
+								<exclude>ext/sun/java2d/d3d/D3DBufImgOpsExt.java</exclude>
+								<exclude>ext/sun/java2d/d3d/D3DDrawImageExt.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>
