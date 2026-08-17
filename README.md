@@ -57,9 +57,6 @@ Example:
 </dependency>
 
 
-Na końcu możesz dodać:
-
-```markdown
 ## Disclaimer
 
 This project is not affiliated with or endorsed by Oracle
