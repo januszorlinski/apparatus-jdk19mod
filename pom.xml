@@ -57,8 +57,7 @@
 		</plugins>
 	</build>
 	
-	<!-- TODO: dostosować zależności, aby to pozwalało na budowanie projektu bez
-	d3d (częściowo zrobione, usunąć testowe fragmenty kodu)-->
+	<!-- budowanie projektu bez	d3d -->
 	<profiles>
 		<profile>
 			<id>exclude-d3d</id>

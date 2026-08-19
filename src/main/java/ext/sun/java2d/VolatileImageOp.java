@@ -16,6 +16,11 @@ import java.awt.image.ColorModel;
 
 public interface VolatileImageOp extends BufferedImageOp, Runnable {
 	
+	public static final int USE_OPERATION = 1;
+	public static final int UNUSE_OPERATION = 2;
+	
+	public static final int GL_TEXTURE_2D = 0xde1;
+	
 	public Runnable setupForRunAndGet(int state, boolean isAlphaPremult, boolean isOGLTexture2D);
 
 	// ------------ BufferedImageOp implementations ------------------

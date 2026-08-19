@@ -54,10 +54,6 @@ import sun.java2d.pipe.RenderQueue;
 
 
 public class OGLBlitLoopsExt {
-	
-	private static final int USE_OPERATION = 1;
-	private static final int UNUSE_OPERATION = 2;
-	private static final int GL_TEXTURE_2D = 0xde1;
 
 	/**
 	 * JDK19u: The following offsets are used to pack the parameters in
@@ -120,12 +116,12 @@ public class OGLBlitLoopsExt {
 			
 			boolean whitShaderGLSL = false;
 			VolatileImageOp shader = null;
-			boolean isTexture2D = (oglDst.getTextureTarget() == GL_TEXTURE_2D);
+			boolean isTexture2D = (oglDst.getTextureTarget() == VolatileImageOp.GL_TEXTURE_2D);
 			boolean isAlphaPremult = oglDst.getDeviceConfiguration().getColorModel().isAlphaPremultiplied();
 			if (biop != null) {
 				if (whitShaderGLSL = (biop instanceof VolatileImageOp)) {
 					shader = (VolatileImageOp) biop;
-					int state = USE_OPERATION;
+					int state = VolatileImageOp.USE_OPERATION;
 					rq.flushAndInvokeNow(shader.setupForRunAndGet(state, isAlphaPremult, isTexture2D));
 				} else {
 					BufferedBufImgOpsExt.enableBufImgOp(rq, oglSrc, vimg, biop);
@@ -136,7 +132,7 @@ public class OGLBlitLoopsExt {
 			enqueueBlit(rq, srcData, dstData, packedParams, sx1, sy1, sx2, sy2, dx1, dy1, dx2, dy2);
 
 			if (whitShaderGLSL) {
-				int state = UNUSE_OPERATION;
+				int state = VolatileImageOp.UNUSE_OPERATION;
 				rq.flushAndInvokeNow(shader.setupForRunAndGet(state, isAlphaPremult, isTexture2D));
 			} else if (biop != null){
 				BufferedBufImgOpsExt.disableBufImgOp(rq, biop);

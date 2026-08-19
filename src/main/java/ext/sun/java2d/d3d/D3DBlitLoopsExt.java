@@ -53,9 +53,6 @@ import sun.java2d.pipe.RenderBuffer;
 import sun.java2d.pipe.RenderQueue;
 
 public class D3DBlitLoopsExt {
-	
-	private static final int USE_OPERATION = 1;
-	private static final int UNUSE_OPERATION = 2;
 
 	/**
 	 * The following offsets are used to pack the parameters in
@@ -120,7 +117,7 @@ public class D3DBlitLoopsExt {
 			if (biop != null) {
 				if (whitShaderHLSL = (biop instanceof VolatileImageOp)) {
 					shader = (VolatileImageOp) biop;
-					int state = USE_OPERATION;
+					int state = VolatileImageOp.USE_OPERATION;
 					rq.flushAndInvokeNow(shader.setupForRunAndGet(state, isAlphaPremult, false));
 				} else {
 					BufferedBufImgOpsExt.enableBufImgOp(rq, d3dSrc, vimg, biop); // TODO: odkomentować, bo to tylko dla testów
@@ -132,7 +129,7 @@ public class D3DBlitLoopsExt {
 			enqueueBlit(rq, srcData, dstData, packedParams, sx1, sy1, sx2, sy2, dx1, dy1, dx2, dy2);
 
 			if (whitShaderHLSL) {
-				int state = UNUSE_OPERATION;
+				int state = VolatileImageOp.UNUSE_OPERATION;
 				rq.flushAndInvokeNow(shader.setupForRunAndGet(state, isAlphaPremult, false));
 			} else if (biop != null){
 				BufferedBufImgOpsExt.disableBufImgOp(rq, biop);
