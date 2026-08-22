@@ -33,29 +33,13 @@ source code and modifications.
 
 ## Modifications
 
-This repository contains modifications to OpenJDK source code.
+This repository contains classes being modificated classes of OpenJDK19 source code.
 
 The modifications were made in 2026.
 
 Modified files contain their original OpenJDK copyright and
 license headers together with an additional notice identifying
 the modifications.
-
-## Maven
-
-The project is distributed as a Maven artifact:
-
-    com.yourname:modified-openjdk19:1.0.0
-
-Example:
-
-```xml
-<dependency>
-    <groupId>com.yourname</groupId>
-    <artifactId>jdk19mod</artifactId>
-    <version>1.0</version>
-</dependency>
-```
 
 ## Disclaimer
 
